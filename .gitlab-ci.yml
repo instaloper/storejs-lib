@@ -1,0 +1,14 @@
+stages:
+  - deploy
+
+publish:
+  stage: deploy
+  tags:
+    - pp-shell
+  only:
+    - tags
+  script:
+    - npm install
+    - echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}'>.npmrc
+    - npm publish
+    - rm .npmrc
